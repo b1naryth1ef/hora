@@ -101,6 +101,19 @@ class Session(BaseModel):
             return True
         return False
 
+    @staticmethod
+    def remove(sid, realm):
+        redis = get_redis()
+        redis.delete("session-%s" % sid)
+        try:
+            s = Session.select().join(User).where(
+                (Session.id == sid) & (User.realm == realm)).get()
+            s.delete_instance()
+            return True
+        except Session.DoesNotExist:
+            return False
+
+
 tables = [Realm, APIAuth, User, Session]
 
 if __name__ == "__main__":
