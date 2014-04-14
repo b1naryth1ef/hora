@@ -51,7 +51,7 @@ def api_pre():
 @api.after_request
 def api_post(resp):
     if g.deprecated:
-        resp.headers["hora-warning"] =  "API Version Deprecated!"
+        resp.headers["hora-warning"] = "API Version Deprecated!"
 
     return resp
 

@@ -132,5 +132,18 @@ if __name__ == "__main__":
     })
     base.save()
 
+    lunch = Realm(name="lunch", config={
+        "sessions": {
+            "duration": {
+                "weeks": 4
+            },
+            "max-count": 24
+        }
+    })
+    lunch.save()
+
+    lauth = APIAuth.create(lunch)
+    print "Lunch Key: `%s`, secret: `%s`" % (lauth.key, lauth.secret)
+
     auth = APIAuth.create(base)
     print "Key: `%s`, Secret: `%s`" % (auth.key, auth.secret)
