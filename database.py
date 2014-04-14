@@ -47,8 +47,8 @@ class APIAuth(BaseModel):
     def create(cls, realm):
         self = cls()
         self.realm = realm
-        self.key = "1"  # get_random_chars(24)
-        self.secret = "1"  # get_random_chars(64)
+        self.key = get_random_chars(24)
+        self.secret = get_random_chars(64)
         self.hash = get_random_chars(128)
         self.save()
         return self
